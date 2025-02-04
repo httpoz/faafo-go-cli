@@ -10,7 +10,7 @@ In the spirit of FAAFO (fuck around and find out), I created this small CLI app 
 
 ## How to run the app
 1. Set up the model in docker locally `make ollama-up`
-3. Run the app `make up`
+3. Run the app `make app`
 
 # Tests (if you want to call it that)
 The output file can be viewed in `files/output-fix.json`. You can also install `git-delta` and run the command:
