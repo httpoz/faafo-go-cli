@@ -1,6 +1,13 @@
 # FAAFO Go cli
 In the spirit of FAAFO (fuck around and find out), I created this small CLI app as part of a hacking hour with [tamirarnesty](https://github.com/tamirarnesty). The POC we were trying to build here is validating an OpenAPI json document.
 
+## Planned improvements
+- [ ] Function calling to actually apply the changes.
+- [ ] Split between fixing syntax and improving spec documentation.
+- [ ] Implement other tools like redocly to chunk larger schema files and run the clean up as a pipeline.
+- [ ] Learn benchmarking and improve the app->response performance.
+- [ ] Make it run on my M1 Pro in a reasonable amount of time. This would make it a viable tool for most developers. My M4 Pro is a cheat code.
+
 ## How to run the app
 1. Set up the model in docker locally `make ollama-up`
 3. Run the app `make up`
