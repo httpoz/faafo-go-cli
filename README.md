@@ -1,12 +1,18 @@
 # FAAFO Go cli
 In the spirit of FAAFO (fuck around and find out), I created this small CLI app as part of a hacking hour with [tamirarnesty](https://github.com/tamirarnesty). The POC we were trying to build here is validating an OpenAPI json document.
 
+> ⚠️ I have resorted to using OpenAI's ChatGPT-4o-mini model as I could not get small models that can run on my MacBook to produce the desired output.
+
 ## Planned improvements
-- [ ] Function calling to actually apply the changes.
+- [x] ~Function calling to actually apply the changes.~ I used structured output instead to make it easier to parse the output.
+- [x] Make it run on my M1 Pro in a reasonable amount of time. This would make it a viable tool for most developers. My M4 Pro is a cheat code.
+- [ ] Handle yaml files as well.
+
+## Nice to have enhancements
 - [ ] Split between fixing syntax and improving spec documentation.
 - [ ] Implement other tools like redocly to chunk larger schema files and run the clean up as a pipeline.
-- [ ] Learn benchmarking and improve the app->response performance.
-- [x] Make it run on my M1 Pro in a reasonable amount of time. This would make it a viable tool for most developers. My M4 Pro is a cheat code.
+- [ ] Learn how to fine-tune a small model to improve the accuracy of the output and use the evals framework to evaluate the LLM.
+
 
 ## How to run the app
 1. Install Ollama with `brew install ollama && ollama pull `
@@ -22,7 +28,7 @@ delta files/sample-api.json files/output-fix.json
 ## Bill of Materials
 1. Official OpenAI go client
 2. Ollama official docker image
-3. llama3.2 3b model
+3. OpenAI ChatGPT-4o-mini model
 
 
 # Learnings
