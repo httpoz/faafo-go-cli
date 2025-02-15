@@ -14,16 +14,14 @@ import (
 )
 
 const (
-	llama32          openai.ChatModel = "llama3.2"
-	deepseek         openai.ChatModel = "deepseek-r1"
-	systemPromptFile string           = "files/system-prompt.txt"
-	userMessageFile  string           = "files/sample-api.json"
+	systemPromptFile string = "files/system-prompt.txt"
+	userMessageFile  string = "files/sample-api.json"
 )
 
 type LLMStructuredResponse struct {
 	Status        string `json:"status" jsonschema_description:"Indicates whether the OpenAPI specification is 'compliant' (valid) or 'fixed' (errors corrected)."`
-	Message       string `json:"message,omitempty" jsonschema_description:"A brief summary describing any modifications made to fix structural or syntax errors in the OpenAPI specification. This field is omitted if no fixes were needed."`
-	CorrectedSpec string `json:"corrected_spec,omitempty" jsonschema_description:"The corrected OpenAPI specification as a JSON object. This field is only present if errors were found and fixed."`
+	Message       string `json:"message" jsonschema_description:"A brief summary describing any modifications made to fix structural or syntax errors in the OpenAPI specification. This field is omitted if no fixes were needed."`
+	CorrectedSpec string `json:"corrected_spec" jsonschema_description:"The corrected OpenAPI specification as a JSON object. This field is only present if errors were found and fixed."`
 }
 
 var (
@@ -45,9 +43,11 @@ func main() {
 		log.Fatal("failed to read system prompt file: ", error)
 	}
 
-	client := openai.NewClient(option.WithBaseURL("http://localhost:11434/v1/"))
+	client := openai.NewClient(
+		option.WithAPIKey(os.Getenv("OPENAI_API_KEY")),
+	)
 
-	response, err := chat(ctx, client, deepseek, systemPrompt, jsonFile)
+	response, err := chat(ctx, client, openai.ChatModelGPT4oMini, systemPrompt, jsonFile)
 	if err != nil {
 		log.Fatal("chat request failed: ", err)
 	}
@@ -71,7 +71,7 @@ func main() {
 
 func chat(ctx context.Context, client *openai.Client, model openai.ChatModel, systemPrompt, userMessage string) (*LLMStructuredResponse, error) {
 	schemaParam := openai.ResponseFormatJSONSchemaJSONSchemaParam{
-		Name:        openai.F("validated open api spec"),
+		Name:        openai.F("validated_open_api_spec"),
 		Description: openai.F("Structured response from LLM for OpenAPI validation and correction"),
 		Schema:      openai.F(ValidatedOpenAPISchemaResponse),
 		Strict:      openai.Bool(true),
