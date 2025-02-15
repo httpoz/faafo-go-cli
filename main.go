@@ -10,7 +10,6 @@ import (
 
 	"github.com/invopop/jsonschema"
 	"github.com/openai/openai-go"
-	"github.com/openai/openai-go/option"
 )
 
 const (
@@ -43,9 +42,7 @@ func main() {
 		log.Fatal("failed to read system prompt file: ", error)
 	}
 
-	client := openai.NewClient(
-		option.WithAPIKey(os.Getenv("OPENAI_API_KEY")),
-	)
+	client := openai.NewClient()
 
 	response, err := chat(ctx, client, openai.ChatModelGPT4oMini, systemPrompt, jsonFile)
 	if err != nil {
