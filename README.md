@@ -7,6 +7,7 @@ In the spirit of FAAFO (fuck around and find out), I created this small CLI app 
 - [x] ~Function calling to actually apply the changes.~ I used structured output instead to make it easier to parse the output.
 - [x] Make it run on my M1 Pro in a reasonable amount of time. This would make it a viable tool for most developers. My M4 Pro is a cheat code.
 - [ ] Handle yaml files as well.
+- [ ] Test this app on a large OpenAPI spec.
 
 ## Nice to have enhancements
 - [ ] Split between fixing syntax and improving spec documentation.
